@@ -123,7 +123,9 @@ const Hunter = () => {
                             </p>
                         </>
                     ) : (
-                        <p>No appointments found</p>
+                        hunt && (
+                            <p>No appointments found</p>
+                        )
                     )}
                 </div>
                 {locationsWithAppointments.map((location, index) => (
