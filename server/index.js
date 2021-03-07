@@ -9,13 +9,17 @@ app.get('/', function (req, res) {
 })
 
 app.get(`/api/locationsWithAppointments`, async (req, res) => {
-    const { state } = req.query;
-    const { data: walgreens } = await axios.get(`https://www.vaccinespotter.org/api/v0/stores/${state}/walgreens.json`);
+    try {
+        const { state } = req.query;
+        const { data: walgreens } = await axios.get(`https://www.vaccinespotter.org/api/v0/stores/${state}/walgreens.json`);
 
-    const walgreensWithAppointments = walgreens
-        .filter((walgreen) => walgreen.appointments.length > 0);
+        const walgreensWithAppointments = walgreens
+            .filter((walgreen) => walgreen.appointments && walgreen.appointments.length > 0);
 
-    res.send(walgreensWithAppointments);
+        res.send(walgreensWithAppointments);
+    } catch (error) {
+        res.status(500).json({ error: error.toString() });
+    }
 });
 
 app.listen(port, () => {
