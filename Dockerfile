@@ -6,6 +6,7 @@ COPY ./client .
 RUN yarn build
 
 FROM node:12.13.1-alpine
+ENV PORT=80
 WORKDIR /app
 COPY ./server .
 RUN yarn
