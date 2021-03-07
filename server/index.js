@@ -3,8 +3,9 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3001;
 
+app.use(express.static('build'));
 app.get('/', function (req, res) {
-    res.send('hello world')
+    res.sendFile('index.html', { root: __dirname });
 })
 
 app.get(`/api/locationsWithAppointments`, async (req, res) => {
