@@ -21,25 +21,33 @@ const SearchCriteriaPicker = (props) => {
 
     return (
         <div>
-            <input
-                defaultValue={searchCriteria.maxDistance}
-                onChange={(e) => {
-                    const maxDistance = +e.target.value;
-                    onUpdateSearchCriteria({ maxDistance });
-                }}
-                type="number" />
-            <select
-                defaultValue={searchCriteria.state}
-                onChange={(e) => {
-                    const state = e.target.value;
-                    onUpdateSearchCriteria({ state });
-                }}>
-                {states.map((state, index) => (
-                    <option key={index} value={state}>
-                        {state}
-                    </option>
-                ))}
-            </select>
+            <div>
+                <label htmlFor="maxDistance">Maximum distance in miles:{' '}</label>
+                <input
+                    defaultValue={searchCriteria.maxDistance}
+                    id="maxDistance"
+                    onChange={(e) => {
+                        const maxDistance = +e.target.value;
+                        onUpdateSearchCriteria({ maxDistance });
+                    }}
+                    type="number" />
+            </div>
+            <div>
+                <label htmlFor="state">State:{' '}</label>
+                <select
+                    defaultValue={searchCriteria.state}
+                    id="state"
+                    onChange={(e) => {
+                        const state = e.target.value;
+                        onUpdateSearchCriteria({ state });
+                    }}>
+                    {states.map((state, index) => (
+                        <option key={index} value={state}>
+                            {state}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <div style={{ height: '500px', position: 'relative', width: '100%' }}>
                 <GoogleMap
                     bootstrapURLKeys={{
