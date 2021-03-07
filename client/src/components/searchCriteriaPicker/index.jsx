@@ -1,11 +1,12 @@
 import GoogleMap from 'google-map-react';
-import { Icon } from '@iconify/react'
-import locationIcon from '@iconify/icons-mdi/map-marker'
+import { Icon } from '@iconify/react';
+import locationIcon from '@iconify/icons-mdi/map-marker';
+
+import './index.scss';
 
 const LocationPin = ({ text }) => (
     <div className="pin">
         <Icon icon={locationIcon} className="pin-icon" />
-        <p className="pin-text">{text}</p>
     </div>
 )
 
@@ -40,8 +41,11 @@ const SearchCriteriaPicker = (props) => {
                 ))}
             </select>
             <div style={{ height: '500px', position: 'relative', width: '100%' }}>
+                Key: {process.env.REACT_APP_GOOGLE_API_KEY}
                 <GoogleMap
-                    bootstrapURLKeys={{ key: 'AIzaSyBQpW_Jyx7vrUVk4T3P4NZl6oPPlhzpl6s' }}
+                    bootstrapURLKeys={{
+                        key: process.env.REACT_APP_GOOGLE_API_KEY,
+                    }}
                     center={{
                         lat: searchCriteria.lat,
                         lng: searchCriteria.lng,
@@ -55,8 +59,7 @@ const SearchCriteriaPicker = (props) => {
                 >
                     <LocationPin
                         lat={searchCriteria.lat}
-                        lng={searchCriteria.lng}
-                        text="Selected location" />
+                        lng={searchCriteria.lng} />
                 </GoogleMap>
             </div>
         </div>
