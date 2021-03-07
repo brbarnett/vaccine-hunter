@@ -63,15 +63,7 @@ const Hunter = () => {
             setLocationsWithAppointments(closeWalgreensWithAppointments);
 
             if (closeWalgreensWithAppointments.length > 0) {
-                console.log(`Found appointments at ${closeWalgreensWithAppointments.length} Walgreens locations`);
-                closeWalgreensWithAppointments.forEach((walgreen) => {
-                    console.log(`${walgreen.city}, ${walgreen.postal_code} (${walgreen.appointments.length} appointments) - ${walgreen.distance} miles`)
-                });
-                console.log(`Head to https://www.walgreens.com/findcare/vaccination/covid-19/location-screening to book an appointment`);
-
                 play();
-            } else {
-                console.log(`Nothing found: ${new Date()}`)
             }
         } catch (error) {
             console.log(error);
@@ -96,7 +88,7 @@ const Hunter = () => {
         <div>
             <h1>Vaccine Hunter</h1>
             <p>
-                Please input your location and maximum distance and start the hunt. This application leverages
+                Please input your location and maximum distance and start the hunt. This application leverages{' '}
                 <a href="https://www.vaccinespotter.org/">https://www.vaccinespotter.org/</a>, additionally
                 letting you filter and sort by your location and maximum distance. It refreshes every 5 minutes to alert you to
                 new appointments as they become available.
@@ -119,17 +111,21 @@ const Hunter = () => {
             )}
 
             <div>
-                {locationsWithAppointments.length > 0 && (
-                    <div>
-                        <p>Found appointments at 6 locations</p>
-                        <p>
-                            Book here:{' '}
-                            <a href="https://www.walgreens.com/findcare/vaccination/covid-19/location-screening">
-                                https://www.walgreens.com/findcare/vaccination/covid-19/location-screening
-                            </a>
-                        </p>
-                    </div>
-                )}
+                <div>
+                    {locationsWithAppointments.length > 0 ? (
+                        <>
+                            <p>Found appointments at 6 locations</p>
+                            <p>
+                                Book here:{' '}
+                                <a href="https://www.walgreens.com/findcare/vaccination/covid-19/location-screening">
+                                    https://www.walgreens.com/findcare/vaccination/covid-19/location-screening
+                                </a>
+                            </p>
+                        </>
+                    ) : (
+                        <p>No appointments found</p>
+                    )}
+                </div>
                 {locationsWithAppointments.map((location, index) => (
                     <p key={index}>
                         {location.name}{' '}
