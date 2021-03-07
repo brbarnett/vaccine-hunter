@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { chain } from 'lodash';
 import axios from 'axios';
 import useSound from 'use-sound';
+import { ToastContainer, toast } from 'react-toastify';
 import Ding from '../assets/ding.mp3';
 import SearchCriteriaPicker from './searchCriteriaPicker';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const getAllWalgreens = async (state) => await axios.get(`/api/locationsWithAppointments?state=${state}`);
 
@@ -66,7 +69,7 @@ const Hunter = () => {
                 play();
             }
         } catch (error) {
-            console.log(error);
+            toast.error('Something went wrong!');
         }
     }
 
@@ -111,6 +114,7 @@ const Hunter = () => {
             )}
 
             <div>
+                <ToastContainer />
                 <div>
                     {locationsWithAppointments.length > 0 ? (
                         <>
