@@ -96,7 +96,7 @@ const Hunter = () => {
             <main>
                 <p>
                     Click on the map to set your location. Please also set maximum distance and state, then start the hunt. This application leverages{' '}
-                    <a href="https://www.vaccinespotter.org/">https://www.vaccinespotter.org/</a> and refreshes every 5 minutes to alert you to
+                    <a href="https://www.vaccinespotter.org/" target="__blank">https://www.vaccinespotter.org/</a> and refreshes every 5 minutes to alert you to
                     new appointments as they become available.
                 </p>
 
@@ -118,9 +118,9 @@ const Hunter = () => {
                             Stop the hunt
                         </button>
 
-                        <div class="d-flex align-items-center">
+                        <div className="d-flex align-items-center">
                             <strong>Hunting...</strong>
-                            <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+                            <div className="spinner-border ml-auto" role="status" aria-hidden="true"></div>
                         </div>
                     </>
                 )}

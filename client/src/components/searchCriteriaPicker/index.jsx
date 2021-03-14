@@ -55,7 +55,7 @@ const SearchCriteriaPicker = (props) => {
 
             <div>
                 <span>Search includes results from:</span>
-                <span class="badge badge-secondary m-2">Walgreens</span>
+                <span className="badge badge-secondary m-2">Walgreens</span>
             </div>
 
             <div style={{ height: '500px', position: 'relative', width: '100%' }}>
