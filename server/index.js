@@ -11,12 +11,20 @@ app.get('/', function (req, res) {
 app.get(`/api/locationsWithAppointments`, async (req, res) => {
     try {
         const { state } = req.query;
+        const { data: cvs } = await axios.get(`https://www.vaccinespotter.org/api/v0/stores/${state}/cvs.json`);
         const { data: walgreens } = await axios.get(`https://www.vaccinespotter.org/api/v0/stores/${state}/walgreens.json`);
+        const { data: walmarts } = await axios.get(`https://www.vaccinespotter.org/api/v0/stores/${state}/walmart.json`);
 
-        const walgreensWithAppointments = walgreens
-            .filter((walgreen) => walgreen.appointments && walgreen.appointments.length > 0);
+        const locations = [
+            ...cvs,
+            ...walgreens,
+            ...walmarts,
+        ];
 
-        res.send(walgreensWithAppointments);
+        const locationsWithAppointments = locations
+            .filter((location) => location.appointments_available);
+
+        res.send(locationsWithAppointments);
     } catch (error) {
         res.status(500).json({ error: error.toString() });
     }
