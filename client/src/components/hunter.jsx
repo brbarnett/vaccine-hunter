@@ -89,57 +89,71 @@ const Hunter = () => {
 
     return (
         <div>
-            <h1>Vaccine Hunter</h1>
-            <p>
-                Please input your location and maximum distance and start the hunt. This application leverages{' '}
-                <a href="https://www.vaccinespotter.org/">https://www.vaccinespotter.org/</a>, additionally
-                letting you filter and sort by your location and maximum distance. It refreshes every 5 minutes to alert you to
-                new appointments as they become available.
-            </p>
+            <header>
+                <h1>Vaccine Hunter</h1>
+            </header>
 
-            <SearchCriteriaPicker
-                {...{
-                    onUpdateSearchCriteria,
-                    searchCriteria,
-                }} />
-            <button
-                onClick={startHunting}>
-                Start hunting!
-            </button>
-            {hunt && (
+            <main>
+                <p>
+                    Please input your location and maximum distance and start the hunt. This application leverages{' '}
+                    <a href="https://www.vaccinespotter.org/">https://www.vaccinespotter.org/</a>, additionally
+                    letting you filter and sort by your location and maximum distance. It refreshes every 5 minutes to alert you to
+                    new appointments as they become available.
+                </p>
+
+                <SearchCriteriaPicker
+                    {...{
+                        onUpdateSearchCriteria,
+                        searchCriteria,
+                    }} />
                 <button
-                    onClick={stopHunting}>
-                    Stop the hunt
+                    className="btn btn-primary m-3"
+                    onClick={startHunting}>
+                    Start hunting!
                 </button>
-            )}
+                {hunt && (
+                    <>
+                        <button
+                            className="btn btn-danger m-3"
+                            onClick={stopHunting}>
+                            Stop the hunt
+                        </button>
 
-            <div>
-                <ToastContainer />
+                        <div class="d-flex align-items-center">
+                            <strong>Hunting...</strong>
+                            <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+                        </div>
+                    </>
+                )}
+
                 <div>
-                    {locationsWithAppointments.length > 0 ? (
-                        <>
-                            <p>Found appointments at 6 locations</p>
-                            <p>
-                                Book here:{' '}
-                                <a href="https://www.walgreens.com/findcare/vaccination/covid-19/location-screening">
-                                    https://www.walgreens.com/findcare/vaccination/covid-19/location-screening
+                    <ToastContainer />
+                    <div>
+                        {locationsWithAppointments.length > 0 ? (
+                            <>
+                                <p>Found appointments at 6 locations</p>
+                                <p>
+                                    Book here:{' '}
+                                    <a href="https://www.walgreens.com/findcare/vaccination/covid-19/location-screening">
+                                        https://www.walgreens.com/findcare/vaccination/covid-19/location-screening
                                 </a>
-                            </p>
-                        </>
-                    ) : (
-                        hunt && (
-                            <p>No appointments found</p>
-                        )
-                    )}
-                </div>
-                {locationsWithAppointments.map((location, index) => (
-                    <p key={index}>
-                        {location.name}{' '}
+                                </p>
+                            </>
+                        ) : (
+                            hunt && (
+                                <p>No appointments found</p>
+                            )
+                        )}
+                    </div>
+                    {locationsWithAppointments.map((location, index) => (
+                        <p key={index}>
+                            {location.name}{' '}
                         - {location.address}, {location.city}, {location.state} {location.postal_code} ({location.distance} miles){' '}
                         - {location.appointments.length} appointments
-                    </p>
-                ))}
-            </div>
+                        </p>
+                    ))}
+                </div>
+            </main>
         </div>
     )
 };

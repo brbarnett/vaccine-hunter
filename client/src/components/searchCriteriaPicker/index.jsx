@@ -21,33 +21,43 @@ const SearchCriteriaPicker = (props) => {
 
     return (
         <div>
+            <form className="form-inline">
+                <div className="form-group">
+                    <label htmlFor="maxDistance">Maximum distance in miles:{' '}</label>
+                    <input
+                        className="form-control m-3"
+                        defaultValue={searchCriteria.maxDistance}
+                        id="maxDistance"
+                        onChange={(e) => {
+                            const maxDistance = +e.target.value;
+                            onUpdateSearchCriteria({ maxDistance });
+                        }}
+                        type="number" />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="state">State:{' '}</label>
+                    <select
+                        className="form-control m-3"
+                        defaultValue={searchCriteria.state}
+                        id="state"
+                        onChange={(e) => {
+                            const state = e.target.value;
+                            onUpdateSearchCriteria({ state });
+                        }}>
+                        {states.map((state, index) => (
+                            <option key={index} value={state}>
+                                {state}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+            </form>
+
             <div>
-                <label htmlFor="maxDistance">Maximum distance in miles:{' '}</label>
-                <input
-                    defaultValue={searchCriteria.maxDistance}
-                    id="maxDistance"
-                    onChange={(e) => {
-                        const maxDistance = +e.target.value;
-                        onUpdateSearchCriteria({ maxDistance });
-                    }}
-                    type="number" />
+                <span>Search includes results from:</span>
+                <span class="badge badge-secondary m-2">Walgreens</span>
             </div>
-            <div>
-                <label htmlFor="state">State:{' '}</label>
-                <select
-                    defaultValue={searchCriteria.state}
-                    id="state"
-                    onChange={(e) => {
-                        const state = e.target.value;
-                        onUpdateSearchCriteria({ state });
-                    }}>
-                    {states.map((state, index) => (
-                        <option key={index} value={state}>
-                            {state}
-                        </option>
-                    ))}
-                </select>
-            </div>
+
             <div style={{ height: '500px', position: 'relative', width: '100%' }}>
                 <GoogleMap
                     bootstrapURLKeys={{
