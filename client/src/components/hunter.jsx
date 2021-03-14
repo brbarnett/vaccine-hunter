@@ -7,8 +7,9 @@ import Ding from '../assets/ding.mp3';
 import SearchCriteriaPicker from './searchCriteriaPicker';
 
 import 'react-toastify/dist/ReactToastify.css';
+import SearchResults from './searchResults';
 
-const getAllWalgreens = async (state) => await axios.get(`/api/locationsWithAppointments?state=${state}`);
+const getAllLocationsWithAppointments = async (state) => await axios.get(`/api/locationsWithAppointments?state=${state}`);
 
 // adapted from https://www.geodatasource.com/developers/javascript
 const calculateDistance = (lat1, lon1, lat2, lon2, unit) => {
@@ -53,19 +54,19 @@ const Hunter = () => {
 
     const run = async () => {
         try {
-            const { data: walgreens } = await getAllWalgreens(searchCriteria.state);
+            const { data: locations } = await getAllLocationsWithAppointments(searchCriteria.state);
 
-            const closeWalgreensWithAppointments =
-                chain(walgreens)
-                    .filter((walgreen) => walgreen.appointments.length > 0)
-                    .map((walgreen) => Object.assign(walgreen, { distance: +calculateDistance(searchCriteria.lat, searchCriteria.lng, walgreen.latitude, walgreen.longitude, 'M').toFixed(1) }))
-                    .filter((walgreen) => walgreen.distance <= searchCriteria.maxDistance)
-                    .sortBy((walgreen) => walgreen.distance)
+            const closeLocationsWithAppointments =
+                chain(locations)
+                    .filter((location) => location.appointments_available)
+                    .map((location) => Object.assign(location, { distance: +calculateDistance(searchCriteria.lat, searchCriteria.lng, location.latitude, location.longitude, 'M').toFixed(1) }))
+                    .filter((location) => location.distance <= searchCriteria.maxDistance)
+                    .sortBy((location) => location.distance)
                     .value();
 
-            setLocationsWithAppointments(closeWalgreensWithAppointments);
+            setLocationsWithAppointments(closeLocationsWithAppointments);
 
-            if (closeWalgreensWithAppointments.length > 0) {
+            if (closeLocationsWithAppointments.length > 0) {
                 play();
             }
         } catch (error) {
@@ -125,33 +126,12 @@ const Hunter = () => {
                     </>
                 )}
 
-                <div>
-                    <ToastContainer />
-                    <div>
-                        {locationsWithAppointments.length > 0 ? (
-                            <>
-                                <p>Found appointments at 6 locations</p>
-                                <p>
-                                    Book here:{' '}
-                                    <a href="https://www.walgreens.com/findcare/vaccination/covid-19/location-screening">
-                                        https://www.walgreens.com/findcare/vaccination/covid-19/location-screening
-                                </a>
-                                </p>
-                            </>
-                        ) : (
-                            hunt && (
-                                <p>No appointments found</p>
-                            )
-                        )}
-                    </div>
-                    {locationsWithAppointments.map((location, index) => (
-                        <p key={index}>
-                            {location.name}{' '}
-                        - {location.address}, {location.city}, {location.state} {location.postal_code} ({location.distance} miles){' '}
-                        - {location.appointments.length} appointments
-                        </p>
-                    ))}
-                </div>
+                <ToastContainer />
+                <SearchResults
+                    {...{
+                        isHunting: !!hunt,
+                        locationsWithAppointments
+                    }} />
             </main>
         </div>
     )
