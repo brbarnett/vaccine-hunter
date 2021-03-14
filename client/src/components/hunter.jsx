@@ -42,7 +42,7 @@ const Hunter = () => {
     const [searchCriteria, setSearchCriteria] = useState({
         lat: 41.76591144742395,
         lng: -88.08859844292297,
-        maxDistance: 300,
+        maxDistance: 200,
         state: `IL`,
     });
 
@@ -95,9 +95,8 @@ const Hunter = () => {
 
             <main>
                 <p>
-                    Please input your location and maximum distance and start the hunt. This application leverages{' '}
-                    <a href="https://www.vaccinespotter.org/">https://www.vaccinespotter.org/</a>, additionally
-                    letting you filter and sort by your location and maximum distance. It refreshes every 5 minutes to alert you to
+                    Click on the map to set your location. Please also set maximum distance and state, then start the hunt. This application leverages{' '}
+                    <a href="https://www.vaccinespotter.org/">https://www.vaccinespotter.org/</a> and refreshes every 5 minutes to alert you to
                     new appointments as they become available.
                 </p>
 
