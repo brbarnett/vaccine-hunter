@@ -133,6 +133,9 @@ const Hunter = () => {
                         locationsWithAppointments
                     }} />
             </main>
+            <footer className="m-5">
+                This project lives here: <a href="https://github.com/brbarnett/vaccine-hunter" target="__blank">https://github.com/brbarnett/vaccine-hunter</a>. Feel free to contribute.
+            </footer>
         </div>
     )
 };
