@@ -38,6 +38,7 @@ const Hunter = () => {
     const pollingInterval = 5 * 60 * 1000;
 
     const [hunt, setHunt] = useState(undefined);
+    const [lastHunt, setLastHunt] = useState(undefined);
     const [play] = useSound(Ding);
     const [locationsWithAppointments, setLocationsWithAppointments] = useState([]);
     const [searchCriteria, setSearchCriteria] = useState({
@@ -69,6 +70,7 @@ const Hunter = () => {
             if (closeLocationsWithAppointments.length > 0) {
                 play();
             }
+            setLastHunt(new Date());
         } catch (error) {
             toast.error('Something went wrong!');
         }
@@ -132,6 +134,12 @@ const Hunter = () => {
                         isHunting: !!hunt,
                         locationsWithAppointments
                     }} />
+
+                {lastHunt && (
+                    <div className="d-flex align-items-center">
+                        Last checked for appointments: { lastHunt.toLocaleDateString() } { lastHunt.toLocaleTimeString() }
+                    </div>
+                )}
             </main>
             <footer className="m-5">
                 This project lives here: <a href="https://github.com/brbarnett/vaccine-hunter" target="__blank">https://github.com/brbarnett/vaccine-hunter</a>. Feel free to contribute.
