@@ -2,6 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "author": "Brandon Barnett",
+  "license": "MIT",
   "dependencies": {
     "@iconify/icons-mdi": "^1.1.12",
     "@iconify/react": "^1.1.4",
