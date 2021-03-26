@@ -1,6 +1,6 @@
 .cache
 .git
-**/.env*
+**/.env.*
 **/build
 **/node_modules
 *.md
