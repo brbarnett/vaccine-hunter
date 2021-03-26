@@ -46,6 +46,7 @@ const Hunter = () => {
         lng: -88.08859844292297,
         maxDistance: 200,
         state: `IL`,
+        ignoreSecondDoseOnly: false,
     });
 
     const onUpdateSearchCriteria = (updatedSearchCriteria) => setSearchCriteria({
@@ -59,7 +60,21 @@ const Hunter = () => {
 
             const closeLocationsWithAppointments =
                 chain(locations)
-                    .filter((location) => location.appointments_available)
+                    .map((location) => {
+                        if(!searchCriteria.ignoreSecondDoseOnly) {
+                            return location;
+                        }
+                        const appointments = location.appointments.filter(appointment => {
+                            return !(appointment.appointment_types && appointment.appointment_types.length && appointment.appointment_types.find(i => i === '2nd_dose_only'));
+                        });
+                        console.log({
+                            original: location.appointments.length,
+                            revised: appointments.length,
+                            appointments
+                        })
+                        return { ...location, appointments };
+                    })
+                    .filter((location) => location.appointments.length > 0)
                     .map((location) => Object.assign(location, { distance: +calculateDistance(searchCriteria.lat, searchCriteria.lng, location.latitude, location.longitude, 'M').toFixed(1) }))
                     .filter((location) => location.distance <= searchCriteria.maxDistance)
                     .sortBy((location) => location.distance)
@@ -107,6 +122,7 @@ const Hunter = () => {
                     {...{
                         onUpdateSearchCriteria,
                         searchCriteria,
+                        hunt
                     }} />
                 <button
                     className="btn btn-primary m-3"
