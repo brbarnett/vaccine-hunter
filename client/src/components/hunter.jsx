@@ -67,11 +67,6 @@ const Hunter = () => {
                         const appointments = location.appointments.filter(appointment => {
                             return !(appointment.appointment_types && appointment.appointment_types.length && appointment.appointment_types.find(i => i === '2nd_dose_only'));
                         });
-                        console.log({
-                            original: location.appointments.length,
-                            revised: appointments.length,
-                            appointments
-                        })
                         return { ...location, appointments };
                     })
                     .filter((location) => location.appointments.length > 0)
