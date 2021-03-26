@@ -13,12 +13,17 @@ const getAppointmentInfo = (appointments) => {
     try {
         appointments.sort((a, b) => a.time < b.time ? -1 : 1);
         return appointments.slice(0, 5).map(a => {
+            const parts = [];
             try {
-                return new Date(a.time).toLocaleString() + ' - ' + a.type;
+                parts.push(new Date(a.time).toLocaleString());
             }
             catch {
-                return a.time + ' - ' + a.type;
+                parts.push(a.time);
             }
+            if (a.type) {
+                parts.push(a.type);
+            }
+            return parts.join(' - ');
         }).join('\n');
     }
     catch {
