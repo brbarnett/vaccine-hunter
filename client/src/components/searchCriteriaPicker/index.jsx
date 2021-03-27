@@ -55,8 +55,8 @@ const SearchCriteriaPicker = (props) => {
                 </div>
                 <div className="form-check my-3">
                     <input
+                        checked={searchCriteria.ignoreSecondDoseOnly}
                         className="form-check-input"
-                        defaultValue={searchCriteria.ignoreSecondDoseOnly}
                         id="ignoreSecondDoseOnly"
                         disabled={!!hunt}
                         type="checkbox"
