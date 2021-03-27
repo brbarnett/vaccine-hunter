@@ -28,7 +28,7 @@ const SearchCriteriaPicker = (props) => {
                         className="form-control m-3"
                         defaultValue={searchCriteria.maxDistance}
                         id="maxDistance"
-                        disabled={hunt}
+                        disabled={!!hunt}
                         onChange={(e) => {
                             const maxDistance = +e.target.value;
                             onUpdateSearchCriteria({ maxDistance });
@@ -41,7 +41,7 @@ const SearchCriteriaPicker = (props) => {
                         className="form-control m-3"
                         defaultValue={searchCriteria.state}
                         id="state"
-                        disabled={hunt}
+                        disabled={!!hunt}
                         onChange={(e) => {
                             const state = e.target.value;
                             onUpdateSearchCriteria({ state });
@@ -58,7 +58,7 @@ const SearchCriteriaPicker = (props) => {
                         className="form-check-input"
                         defaultValue={searchCriteria.ignoreSecondDoseOnly}
                         id="ignoreSecondDoseOnly"
-                        disabled={hunt}
+                        disabled={!!hunt}
                         type="checkbox"
                         onChange={(e) => {
                             const ignoreSecondDoseOnly = e.target.checked;
