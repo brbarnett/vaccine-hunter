@@ -46,11 +46,11 @@ const Hunter = () => {
 
     const savedSearchCriteriaString = window.localStorage.getItem(searchCriteriaLocalStorageKey);
     const [searchCriteria, setSearchCriteria] = useState((savedSearchCriteriaString && JSON.parse(savedSearchCriteriaString)) || {
+        ignoreSecondDoseOnly: false,
         lat: 41.76591144742395,
         lng: -88.08859844292297,
         maxDistance: 150,
         state: `IL`,
-        ignoreSecondDoseOnly: false,
     });
 
     const onUpdateSearchCriteria = (updatedSearchCriteria) => {
@@ -68,16 +68,19 @@ const Hunter = () => {
 
             const closeLocationsWithAppointments =
                 chain(locations)
+                    .filter((location) => location.appointments_available)
                     .map((location) => {
-                        if(!searchCriteria.ignoreSecondDoseOnly) {
+                        if (!searchCriteria.ignoreSecondDoseOnly) {
                             return location;
                         }
+
                         const appointments = location.appointments.filter(appointment => {
                             return !(appointment.appointment_types && appointment.appointment_types.length && appointment.appointment_types.find(i => i === '2nd_dose_only'));
                         });
+
                         return { ...location, appointments };
                     })
-                    .filter((location) => location.appointments.length > 0)
+                    .filter((location) => location.appointments.length > 0 || location.brand === `cvs`) // CVS doesn't return appointment details
                     .map((location) => Object.assign(location, { distance: +calculateDistance(searchCriteria.lat, searchCriteria.lng, location.latitude, location.longitude, 'M').toFixed(1) }))
                     .filter((location) => location.distance <= searchCriteria.maxDistance)
                     .sortBy((location) => location.distance)
