@@ -17,7 +17,7 @@ const states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC",
     "SD", "TN", "TX", "UT", "VA", "VT", "WA", "WI", "WV", "WY"];
 
 const SearchCriteriaPicker = (props) => {
-    const { onUpdateSearchCriteria, searchCriteria, hunt } = props;
+    const { hunt, onUpdateSearchCriteria, searchCriteria } = props;
 
     return (
         <div>
@@ -27,8 +27,8 @@ const SearchCriteriaPicker = (props) => {
                     <input
                         className="form-control m-3"
                         defaultValue={searchCriteria.maxDistance}
-                        id="maxDistance"
                         disabled={!!hunt}
+                        id="maxDistance"
                         onChange={(e) => {
                             const maxDistance = +e.target.value;
                             onUpdateSearchCriteria({ maxDistance });
@@ -40,8 +40,8 @@ const SearchCriteriaPicker = (props) => {
                     <select
                         className="form-control m-3"
                         defaultValue={searchCriteria.state}
-                        id="state"
                         disabled={!!hunt}
+                        id="state"
                         onChange={(e) => {
                             const state = e.target.value;
                             onUpdateSearchCriteria({ state });
@@ -57,13 +57,13 @@ const SearchCriteriaPicker = (props) => {
                     <input
                         checked={searchCriteria.ignoreSecondDoseOnly}
                         className="form-check-input"
-                        id="ignoreSecondDoseOnly"
                         disabled={!!hunt}
-                        type="checkbox"
+                        id="ignoreSecondDoseOnly"
                         onChange={(e) => {
                             const ignoreSecondDoseOnly = e.target.checked;
                             onUpdateSearchCriteria({ ignoreSecondDoseOnly });
                         }}
+                        type="checkbox"
                     />
                     <label className="form-check-label" htmlFor="ignoreSecondDoseOnly">Ignore "Second Dose Only" appointments</label>
                 </div>

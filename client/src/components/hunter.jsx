@@ -126,9 +126,9 @@ const Hunter = () => {
 
                 <SearchCriteriaPicker
                     {...{
+                        hunt,
                         onUpdateSearchCriteria,
                         searchCriteria,
-                        hunt
                     }} />
                 <button
                     className="btn btn-primary m-3"
