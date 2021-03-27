@@ -5,9 +5,11 @@ import useSound from 'use-sound';
 import { ToastContainer, toast } from 'react-toastify';
 import Ding from '../assets/ding.mp3';
 import SearchCriteriaPicker from './searchCriteriaPicker';
+import SearchResults from './searchResults';
 
 import 'react-toastify/dist/ReactToastify.css';
-import SearchResults from './searchResults';
+
+const searchCriteriaLocalStorageKey = `searchCriteria`;
 
 const getAllLocationsWithAppointments = async (state) => await axios.get(`/api/locationsWithAppointments?state=${state}`);
 
@@ -41,18 +43,24 @@ const Hunter = () => {
     const [lastHunt, setLastHunt] = useState(undefined);
     const [play] = useSound(Ding);
     const [locationsWithAppointments, setLocationsWithAppointments] = useState([]);
-    const [searchCriteria, setSearchCriteria] = useState({
+
+    const savedSearchCriteriaString = window.localStorage.getItem(searchCriteriaLocalStorageKey);
+    const [searchCriteria, setSearchCriteria] = useState((savedSearchCriteriaString && JSON.parse(savedSearchCriteriaString)) || {
         lat: 41.76591144742395,
         lng: -88.08859844292297,
-        maxDistance: 200,
+        maxDistance: 150,
         state: `IL`,
         ignoreSecondDoseOnly: false,
     });
 
-    const onUpdateSearchCriteria = (updatedSearchCriteria) => setSearchCriteria({
-        ...searchCriteria,
-        ...updatedSearchCriteria,
-    });
+    const onUpdateSearchCriteria = (updatedSearchCriteria) => {
+        const combinedSearchCriteria = Object.assign({}, searchCriteria, updatedSearchCriteria);
+
+        // persist state
+        window.localStorage.setItem(searchCriteriaLocalStorageKey, JSON.stringify(combinedSearchCriteria));
+
+        setSearchCriteria(combinedSearchCriteria);
+    };
 
     const run = async () => {
         try {
@@ -148,7 +156,7 @@ const Hunter = () => {
 
                 {lastHunt && (
                     <div className="d-flex align-items-center">
-                        Last checked for appointments: { lastHunt.toLocaleDateString() } { lastHunt.toLocaleTimeString() }
+                        Last checked for appointments: { lastHunt.toLocaleDateString()} { lastHunt.toLocaleTimeString()}
                     </div>
                 )}
             </main>

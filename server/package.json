@@ -2,6 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
+  "author": "Brandon Barnett",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",

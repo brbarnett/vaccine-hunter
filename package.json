@@ -1,0 +1,14 @@
+{
+  "name": "vaccine-hunter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/brbarnett/vaccine-hunter.git",
+  "author": "Brandon Barnett",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently \"cd client && yarn && yarn start\" \"cd server && yarn && yarn start\" --kill-others"
+  },
+  "dependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
