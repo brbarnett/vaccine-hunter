@@ -9,7 +9,6 @@
     "@iconify/react": "^1.1.4",
     "axios": "^0.21.1",
     "google-map-react": "^2.1.9",
-    "howler": "^2.2.1",
     "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
