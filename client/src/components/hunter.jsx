@@ -119,6 +119,11 @@ const Hunter = () => {
 
             <main>
                 <p>
+                    COVID-19 vaccines are exceptionally difficult to find right now because new appointments pop up at seemingly random
+                    times and lucky seekers snap them up very quickly. This application will notify you as soon as it finds available
+                    appointments in your area if you keep it running. It is free and I do not collect any personal information.
+                </p>
+                <p>
                     Click on the map to set your location. Please also set maximum distance and state, then start the hunt. This application leverages{' '}
                     <a href="https://www.vaccinespotter.org/" target="__blank">https://www.vaccinespotter.org/</a> and refreshes every 5 minutes to alert you to
                     new appointments as they become available.
