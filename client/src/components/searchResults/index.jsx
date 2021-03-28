@@ -47,13 +47,28 @@ const SearchResults = (props) => {
                 )}
             </div>
             {locationsWithAppointments.map((location, index) => (
-                <p key={index}>
-                    <span className="badge badge-success m-2">{location.brand}</span>
-                    {location.name}{' '}
-                        - {location.address}, {location.city}, {location.state} {location.postal_code} ({location.distance} miles){' '}
-                        - <span title={getAppointmentInfo(location.appointments)}>{location.appointments.length > 0 ? location.appointments.length : `unknown`} appointments{' '}</span>
-                    <a href={website[location.brand]} target="__blank">click here</a>
-                </p>
+                <div className="row" key={index}>
+                    <div className="col-3 col-sm-3 col-md-2">
+                        <p>
+                            <span className="badge badge-success">{location.brand}</span>
+                        </p>
+                        <p>
+                            <span title={getAppointmentInfo(location.appointments)}>
+                                <strong>{location.appointments.length > 0 ? location.appointments.length : `unknown`}</strong>
+                                {' '}appts
+                            </span>
+                        </p>
+                    </div>
+                    <div className="col-6 col-sm-6 col-md-8">
+                        <p>{location.name}</p>
+                        <p>{location.address}</p>
+                        <p>{location.city}, {location.state} {location.postal_code}</p>
+                    </div>
+                    <div className="col-3 col-sm-3 col-md-2">
+                        <p>{location.distance} miles</p>
+                        <a className="btn btn-secondary" href={website[location.brand]} target="__blank">Book</a>
+                    </div>
+                </div>
             ))}
         </div>
     );
