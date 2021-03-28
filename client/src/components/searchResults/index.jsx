@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { chain } from 'lodash';
 
 const website = {
     "cvs": "https://www.cvs.com/immunizations/covid-19-vaccine",
@@ -34,7 +34,7 @@ const getAppointmentInfo = (appointments) => {
 }
 
 const renderVaccineTypes = (appointments) => {
-    const vaccineTypes = _(appointments)
+    const vaccineTypes = chain(appointments)
         .flatMap(appointment => appointment.type.split(','))
         .uniq()
         .sort()
