@@ -35,7 +35,7 @@ const getAppointmentInfo = (appointments) => {
 
 const renderVaccineTypes = (appointments) => {
     const vaccineTypes = chain(appointments)
-        .flatMap(appointment => appointment.type && appointment.type.split(',') || [])
+        .flatMap(appointment => (appointment.type && appointment.type.split(',')) || [])
         .uniq()
         .sort()
         .value();
