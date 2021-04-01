@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { chain } from 'lodash';
 import axios from 'axios';
 import useSound from 'use-sound';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Ding from '../assets/ding.mp3';
 import SearchCriteriaPicker from './searchCriteriaPicker';
 import SearchResults from './searchResults';
-
-import 'react-toastify/dist/ReactToastify.css';
 
 const searchCriteriaLocalStorageKey = `searchCriteria`;
 
@@ -130,7 +128,7 @@ const Hunter = () => {
                 </p>
                 <p>
                     If you're interested in donating to support this project, please{` `}
-                    <a href="https://givebutter.com/vaccinespotter" target="__blank">donate to the original author of the Vaccine Spotter</a>. He did all the hard work to produce this data and 
+                    <a href="https://givebutter.com/vaccinespotter" target="__blank">donate to the original author of the Vaccine Spotter</a>. He did all the hard work to produce this data and
                     make it available, I just wrote an app on top of it.
                 </p>
 
@@ -160,7 +158,6 @@ const Hunter = () => {
                     </>
                 )}
 
-                <ToastContainer />
                 <SearchResults
                     {...{
                         isHunting: !!hunt,
