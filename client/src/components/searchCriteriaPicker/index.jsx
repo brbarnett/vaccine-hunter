@@ -20,7 +20,7 @@ const SearchCriteriaPicker = (props) => {
     const { hunt, onUpdateSearchCriteria, searchCriteria } = props;
 
     return (
-        <div>
+        <div id="search">
             <form className="form-inline">
                 <div className="form-group">
                     <label htmlFor="maxDistance">Maximum distance in miles:{' '}</label>

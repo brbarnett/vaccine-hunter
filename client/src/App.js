@@ -17,7 +17,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div>
       <Hunter />
       <ToastContainer />
     </div>

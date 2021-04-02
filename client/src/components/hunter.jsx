@@ -112,25 +112,36 @@ const Hunter = () => {
     return (
         <div>
             <header>
-                <h1>Vaccine Hunter</h1>
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+                    <a className="navbar-brand" href="/">Vaccine Hunter</a>
+                </nav>
             </header>
 
-            <main>
-                <p>
-                    COVID-19 vaccines are exceptionally difficult to find right now because new appointments pop up at seemingly random
-                    times and lucky seekers snap them up very quickly. This application will notify you as soon as it finds available
-                    appointments in your area if you keep it running. It is free and I do not collect any personal information.
-                </p>
-                <p>
-                    Click on the map to set your location. Please also set maximum distance and state, then start the hunt. This application leverages{' '}
-                    <a href="https://www.vaccinespotter.org/" target="__blank">https://www.vaccinespotter.org/</a> and refreshes every 5 minutes to alert you to
-                    new appointments as they become available.
-                </p>
-                <p>
-                    If you're interested in donating to support this project, please{` `}
-                    <a href="https://givebutter.com/vaccinespotter" target="__blank">donate to the original author of the Vaccine Spotter</a>. He did all the hard work to produce this data and
-                    make it available, I just wrote an app on top of it.
-                </p>
+            <main className="container">
+                <div className="jumbotron py-4 my-4">
+                    <h1>Vaccine Hunter</h1>
+                    <p>
+                        <a href="#search">Less reading, more hunting!</a>
+                    </p>
+                    <p>
+                        COVID-19 vaccines are exceptionally difficult to find right now because new appointments pop up at seemingly random
+                        times and lucky seekers snap them up very quickly. This application will notify you as soon as it finds available
+                        appointments in your area if you keep it running. It is free and I do not collect any personal information.
+                    </p>
+                    <p>
+                        Click on the map to set your location. Please also set maximum distance and state, then start the hunt. This application leverages{' '}
+                        <a href="https://www.vaccinespotter.org/" target="__blank">https://www.vaccinespotter.org/</a> and refreshes every 5 minutes to alert you to
+                        new appointments as they become available.
+                    </p>
+                    <p>
+                        If you're interested in donating to support this project, please{` `}
+                        <a href="https://givebutter.com/vaccinespotter" target="__blank">donate to the original author of the Vaccine Spotter</a>. He did all the hard work to produce this data and
+                        make it available, I just wrote an app on top of it.
+                    </p>
+                    <p>
+                        Happy hunting!
+                    </p>
+                </div>
 
                 <SearchCriteriaPicker
                     {...{
