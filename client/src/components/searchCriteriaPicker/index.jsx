@@ -97,6 +97,9 @@ const SearchCriteriaPicker = (props) => {
                         lng={searchCriteria.lng} />
                 </GoogleMap>
             </div>
+            <div>
+                <strong>Click on the map to search for your specific location</strong>
+            </div>
         </div>
     );
 }
