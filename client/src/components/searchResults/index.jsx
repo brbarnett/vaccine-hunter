@@ -13,20 +13,24 @@ const getAppointmentInfo = (appointments) => {
         return '';
     }
     try {
-        appointments.sort((a, b) => a.time < b.time ? -1 : 1);
-        return appointments.slice(0, 5).map(a => {
-            const parts = [];
-            try {
-                parts.push(new Date(a.time).toLocaleString());
-            }
-            catch {
-                parts.push(a.time);
-            }
-            if (a.type) {
-                parts.push(a.type);
-            }
-            return parts.join(' - ');
-        }).join('\n');
+        return chain(appointments)
+            .sortBy(a => a.time)
+            .slice(0, 5)
+            .map(a => {
+                const parts = [];
+                try {
+                    parts.push(new Date(a.time).toLocaleString());
+                }
+                catch {
+                    parts.push(a.time);
+                }
+                if (a.type) {
+                    parts.push(a.type);
+                }
+                return parts.join(' - ');
+            })
+            .join('\n')
+            .value();
     }
     catch {
         return '<unable to understand appointments>';
